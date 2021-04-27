@@ -23,31 +23,35 @@ __version__ = "2.2.0"
 ##  --boolean
 
 def initialize_arguments():
+	config = {}
     parser = ArgumentParser()
-    parser.add_argument("--file", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
-    args, left = parser.parse_known_args()
-    if args.file is not None:
-        sys.argv = sys.argv[:1] + left
+    parser.add_argument("--config", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
+    parser.add_argument("--vars",
+                        metavar="KEY=VALUE",
+                        nargs='?',
+                        help="Set a number of key-value pairs "
+                             "(do not put spaces before or after the = sign). "
+                             "If a value contains spaces, you should define "
+                             "it with double quotes: "
+                             'foo="this is a sentence". Note that '
+                             "values are always treated as strings.")
+	args = parser.parse_known_args()
+    if args.config is not None:
         try:
-            return json.load(args.file)
+            config = json.load(args.config)
         except Exception as e:
+            print(e)
+    if args.vars is not None:
+		try:
+            for var in args.vars:
+				key, val = var.split("=")
+				config[key] = val
+			return config
+		except Exception as e:
             print(e)
     return {}
 
-
 arguments = initialize_arguments()
-
-positionals = []
-for arg in sys.argv[1:]:
-	if '--' == arg[:2]:
-		if '=' in arg:
-			key, val = [x.strip() for x in arg[2:].split('=', 1)]
-		else:
-			key, val = arg[2:], True
-		arguments[key] = val
-	else:
-		positionals.append(arg)
-
 
 # TODO: Learn the dark arts of argparse...
 #	   (I summon thee dark spawn of cPython)
