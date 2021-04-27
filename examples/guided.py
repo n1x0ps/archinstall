@@ -8,11 +8,6 @@ if archinstall.arguments.get('help'):
 	print("See `man archinstall` for help.")
 	exit(0)
 
-def is_config_provided():
-	if len(archinstall.arguments.keys()) == 0:
-		return False
-	return True
-
 def ask_user_questions():
 	"""
 	  First, we'll ask the user for a bunch of user input.
@@ -395,8 +390,6 @@ def perform_installation(mountpoint):
 			except:
 				pass
 
-print(is_config_provided(),len(archinstall.arguments.keys()))
-if is_config_provided():
-	print(is_config_provided())
+if not archinstall.arguments:
 	ask_user_questions()
 perform_installation_steps()
