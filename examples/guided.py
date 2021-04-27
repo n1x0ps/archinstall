@@ -401,6 +401,6 @@ else:
 	# Temporarily disabling keep_partitions if config file is loaded
 	archinstall.arguments['harddrive'].keep_partitions = False
 	# Profile object should be created in perform_installation_steps
-	archinstall.arguments['profile'] = Profile(path=archinstall.arguments['profile']['path'])
+	archinstall.arguments['profile'] = Profile(installer=None, path=archinstall.arguments['profile']['path'])
 
 perform_installation_steps()
