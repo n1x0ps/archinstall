@@ -24,32 +24,32 @@ __version__ = "2.2.0"
 
 def initialize_arguments():
 	config = {}
-    parser = ArgumentParser()
-    parser.add_argument("--config", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
-    parser.add_argument("--vars",
-                        metavar="KEY=VALUE",
-                        nargs='?',
-                        help="Set a number of key-value pairs "
-                             "(do not put spaces before or after the = sign). "
-                             "If a value contains spaces, you should define "
-                             "it with double quotes: "
-                             'foo="this is a sentence". Note that '
-                             "values are always treated as strings.")
+	parser = ArgumentParser()
+	parser.add_argument("--config", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
+	parser.add_argument("--vars",
+						metavar="KEY=VALUE",
+						nargs='?',
+						help="Set a number of key-value pairs "
+							 "(do not put spaces before or after the = sign). "
+							 "If a value contains spaces, you should define "
+							 "it with double quotes: "
+							 'foo="this is a sentence". Note that '
+							 "values are always treated as strings.")
 	args = parser.parse_known_args()
-    if args.config is not None:
-        try:
-            config = json.load(args.config)
-        except Exception as e:
-            print(e)
-    if args.vars is not None:
+	if args.config is not None:
 		try:
-            for var in args.vars:
+			config = json.load(args.config)
+		except Exception as e:
+			print(e)
+	if args.vars is not None:
+		try:
+			for var in args.vars:
 				key, val = var.split("=")
 				config[key] = val
 			return config
 		except Exception as e:
-            print(e)
-    return {}
+			print(e)
+	return {}
 
 arguments = initialize_arguments()
 
