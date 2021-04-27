@@ -14,6 +14,7 @@ from .lib.packages import *
 from .lib.output import *
 from .lib.storage import *
 from .lib.hardware import *
+from argparse import ArgumentParser, FileType
 
 __version__ = "2.2.0"
 
