@@ -66,8 +66,9 @@ def run_as_a_module():
 	# Add another path for finding profiles, so that list_profiles() in Script() can find guided.py, unattended.py etc.
 	storage['PROFILE_PATH'].append(os.path.abspath(f'{os.path.dirname(__file__)}/examples'))
 	parser.add_argument("--script", default="guided", nargs="?", help="Script to run for installation", type=str)
+	args = parser.parse_args()
 	try:
-		script = Script(sys.argv[1])
+		script = Script(args.script)
 	except ProfileNotFound as err:
 		print(f"Couldn't find file: {err}")
 		sys.exit(1)
