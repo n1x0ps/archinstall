@@ -9,10 +9,11 @@ if archinstall.arguments.get('help'):
 	exit(0)
 
 def is_config_provided():
+	print(archinstall.arguments)
 	if not archinstall.arguments:
 		return False
 	return True
-	
+
 def ask_user_questions():
 	"""
 	  First, we'll ask the user for a bunch of user input.
