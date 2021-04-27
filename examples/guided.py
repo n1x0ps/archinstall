@@ -393,6 +393,7 @@ def perform_installation(mountpoint):
 if not archinstall.arguments:
 	ask_user_questions()
 else:
+	# Workarounds if config is loaded from a file
 	# The harddrive section should be moved to perform_installation_steps, where it's actually being performed
 	# Blockdevice object should be created in perform_installation_steps
 	# This needs to be done until then
@@ -400,6 +401,6 @@ else:
 	# Temporarily disabling keep_partitions if config file is loaded
 	archinstall.arguments['harddrive'].keep_partitions = False
 	# Profile object should be created in perform_installation_steps
-	archinstall.arguments['profile'] = archinstall.list_profiles()[archinstall.arguments['profile']]
+	archinstall.arguments['profile'] = archinstall.select_profile(archinstall.arguments['profile']['path'].split('/')[-1].split(.)[0])
 
 perform_installation_steps()
