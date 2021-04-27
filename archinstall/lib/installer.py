@@ -39,7 +39,7 @@ class Installer():
 	:type hostname: str, optional
 
 	"""
-	def __init__(self, target, *, base_packages='base base-devel linux linux-firmware', kernels='linux'):
+	def __init__(self, target, *, base_packages='base base-devel linux linux-firmware ', kernels='linux'):
 		base_packages = base_packages + kernels.replace(',', ' ')
 		self.target = target
 		self.init_time = time.strftime('%Y-%m-%d_%H-%M-%S')
