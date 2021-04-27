@@ -9,8 +9,7 @@ if archinstall.arguments.get('help'):
 	exit(0)
 
 def is_config_provided():
-	print(archinstall.arguments)
-	if not archinstall.arguments:
+	if len(archinstall.arguments.keys()) == 0:
 		return False
 	return True
 
