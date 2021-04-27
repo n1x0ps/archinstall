@@ -8,6 +8,11 @@ if archinstall.arguments.get('help'):
 	print("See `man archinstall` for help.")
 	exit(0)
 
+def is_config_provided():
+	if archinstall.arguments is not None:
+		return True
+	return False
+
 def ask_user_questions():
 	"""
 	  First, we'll ask the user for a bunch of user input.
@@ -259,7 +264,9 @@ def perform_installation_steps():
 		mode = archinstall.GPT
 		if hasUEFI() is False:
 			mode = archinstall.MBR
-
+        keep_partitions = archinstall.arguments['harddrive'].get('keep_partitions', False)
+        archinstall.arguments['harddrive'] = archinstall.BlockDevice(path=archinstall.arguments['harddrive']['path'])
+    	archinstall.arguments['harddrive'].keep_partitions = keep_partitions
 		with archinstall.Filesystem(archinstall.arguments['harddrive'], mode) as fs:
 			# Wipe the entire drive if the disk flag `keep_partitions`is False.
 			if archinstall.arguments['harddrive'].keep_partitions is False:
@@ -387,6 +394,6 @@ def perform_installation(mountpoint):
 				installation.drop_to_shell()
 			except:
 				pass
-
-ask_user_questions()
+if not is_config_provided():
+	ask_user_questions()
 perform_installation_steps()

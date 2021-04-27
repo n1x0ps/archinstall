@@ -20,7 +20,22 @@ __version__ = "2.2.0"
 ## Basic version of arg.parse() supporting:
 ##  --key=value
 ##  --boolean
-arguments = {}
+
+def initialize_arguments():
+    parser = ArgumentParser()
+    parser.add_argument("--file", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
+    args, left = parser.parse_known_args()
+    if args.file is not None:
+        sys.argv = sys.argv[:1]
+        try:
+            return json.load(args.file)
+        except Exception as e:
+            print(e)
+    return {}
+
+
+arguments = initialize_arguments()
+
 positionals = []
 for arg in sys.argv[1:]:
 	if '--' == arg[:2]:
