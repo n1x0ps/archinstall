@@ -9,7 +9,7 @@ if archinstall.arguments.get('help'):
 	exit(0)
 
 def hdd_to_block_device(hdd_config):
-	return archinstall.BlockDevice(hdd_config, path=hdd_config['path'])
+	return archinstall.BlockDevice(path=hdd_config['path'])
 
 def ask_user_questions():
 	"""
