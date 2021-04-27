@@ -15,6 +15,7 @@ from .lib.output import *
 from .lib.storage import *
 from .lib.hardware import *
 from argparse import ArgumentParser, FileType
+parser = ArgumentParser()
 
 __version__ = "2.2.0"
 
@@ -24,7 +25,6 @@ __version__ = "2.2.0"
 
 def initialize_arguments():
 	config = {}
-	parser = ArgumentParser()
 	parser.add_argument("--config", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
 	parser.add_argument("--vars",
 						metavar="KEY=VALUE",
@@ -65,10 +65,7 @@ def run_as_a_module():
 
 	# Add another path for finding profiles, so that list_profiles() in Script() can find guided.py, unattended.py etc.
 	storage['PROFILE_PATH'].append(os.path.abspath(f'{os.path.dirname(__file__)}/examples'))
-
-	if len(sys.argv) == 1:
-		sys.argv.append('guided')
-
+	parser.add_argument("--script", default="guided", nargs="?", help="Script to run for installation", type=str)
 	try:
 		script = Script(sys.argv[1])
 	except ProfileNotFound as err:
