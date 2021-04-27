@@ -264,9 +264,9 @@ def perform_installation_steps():
 		mode = archinstall.GPT
 		if hasUEFI() is False:
 			mode = archinstall.MBR
-        keep_partitions = archinstall.arguments['harddrive'].get('keep_partitions', False)
-        archinstall.arguments['harddrive'] = archinstall.BlockDevice(path=archinstall.arguments['harddrive']['path'])
-    	archinstall.arguments['harddrive'].keep_partitions = keep_partitions
+		keep_partitions = archinstall.arguments['harddrive'].get('keep_partitions', False)
+		archinstall.arguments['harddrive'] = archinstall.BlockDevice(path=archinstall.arguments['harddrive']['path'])
+		archinstall.arguments['harddrive'].keep_partitions = keep_partitions
 		with archinstall.Filesystem(archinstall.arguments['harddrive'], mode) as fs:
 			# Wipe the entire drive if the disk flag `keep_partitions`is False.
 			if archinstall.arguments['harddrive'].keep_partitions is False:
