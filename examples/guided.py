@@ -8,6 +8,9 @@ if archinstall.arguments.get('help'):
 	print("See `man archinstall` for help.")
 	exit(0)
 
+def hdd_to_block_device(hdd_config):
+	return archinstall.BlockDevice(hdd_config)
+
 def ask_user_questions():
 	"""
 	  First, we'll ask the user for a bunch of user input.
@@ -42,7 +45,7 @@ def ask_user_questions():
 
 	# Ask which harddrive/block-device we will install to
 	if archinstall.arguments.get('harddrive', None):
-		archinstall.arguments['harddrive'] = archinstall.BlockDevice(archinstall.arguments['harddrive'])
+		archinstall.arguments['harddrive'] = hdd_to_block_device(archinstall.arguments.get('harddrive', None))
 	else:
 		archinstall.arguments['harddrive'] = archinstall.select_disk(archinstall.all_disks())
 		if archinstall.arguments['harddrive'] is None:
@@ -389,4 +392,8 @@ def perform_installation(mountpoint):
 
 if not archinstall.arguments:
 	ask_user_questions()
+else:
+	# The harddrive section should be moved to perform_installation_steps, where it's actually being performed
+	# This needs to be done until then
+	archinstall.arguments['harddrive'] = hdd_to_block_device(archinstall.arguments.get('harddrive', None))
 perform_installation_steps()
