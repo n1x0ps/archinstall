@@ -394,8 +394,12 @@ if not archinstall.arguments:
 	ask_user_questions()
 else:
 	# The harddrive section should be moved to perform_installation_steps, where it's actually being performed
+	# Blockdevice object should be created in perform_installation_steps
 	# This needs to be done until then
 	archinstall.arguments['harddrive'] = hdd_to_block_device(archinstall.arguments.get('harddrive', None))
 	# Temporarily disabling keep_partitions if config file is loaded
 	archinstall.arguments['harddrive'].keep_partitions = False
+	# Profile object should be created in perform_installation_steps
+	archinstall.arguments['profile'] = archinstall.list_profiles()[archinstall.arguments['profile']]
+
 perform_installation_steps()
