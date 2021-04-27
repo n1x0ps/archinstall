@@ -396,4 +396,6 @@ else:
 	# The harddrive section should be moved to perform_installation_steps, where it's actually being performed
 	# This needs to be done until then
 	archinstall.arguments['harddrive'] = hdd_to_block_device(archinstall.arguments.get('harddrive', None))
+	# Temporarily disabling keep_partitions if config file is loaded
+	archinstall.arguments['harddrive'].keep_partitions = False
 perform_installation_steps()
