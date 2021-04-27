@@ -46,10 +46,9 @@ def initialize_arguments():
 			for var in args.vars:
 				key, val = var.split("=")
 				config[key] = val
-			return config
 		except Exception as e:
 			print(e)
-	return {}
+	return config
 
 arguments = initialize_arguments()
 
