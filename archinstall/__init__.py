@@ -35,7 +35,7 @@ def initialize_arguments():
 							 "it with double quotes: "
 							 'foo="this is a sentence". Note that '
 							 "values are always treated as strings.")
-	args = parser.parse_known_args()
+	args = parser.parse_args()
 	if args.config is not None:
 		try:
 			config = json.load(args.config)
