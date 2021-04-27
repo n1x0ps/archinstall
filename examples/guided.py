@@ -394,6 +394,9 @@ def perform_installation(mountpoint):
 				installation.drop_to_shell()
 			except:
 				pass
+
+print(is_config_provided(),len(archinstall.arguments.keys()))
 if is_config_provided():
+	print(is_config_provided())
 	ask_user_questions()
 perform_installation_steps()
