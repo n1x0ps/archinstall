@@ -221,9 +221,6 @@ class Partition():
 
 	@encrypted.setter
 	def encrypted(self, value :bool):
-		if value:
-			log(f'Marking {self} as encrypted: {value}', level=logging.DEBUG)
-			log(f"Callstrack when marking the partition: {''.join(traceback.format_stack())}", level=logging.DEBUG)
 
 		self._encrypted = value
 
@@ -474,7 +471,6 @@ class Filesystem():
 
 	def raw_parted(self, string:str):
 		x = sys_command(f'/usr/bin/parted -s {string}')
-		log(f"'parted -s {string}' returned: {b''.join(x)}", level=logging.DEBUG)
 		return x
 
 	def parted(self, string:str):

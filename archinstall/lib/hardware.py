@@ -3,6 +3,8 @@ from .general import sys_command
 from .networking import list_interfaces, enrichIfaceTypes
 from typing import Optional
 
+__packages__ = ['xf86-video-amdgpu', 'xf86-video-ati', 'xf86-video-intel', 'xf86-video-nouveau', 'xf86-video-fbdev', 'xf86-video-vesa', 'xf86-video-vmware', 'nvidia', 'mesa']
+
 AVAILABLE_GFX_DRIVERS = {
 	# Sub-dicts are layer-2 options to be selected
 	# and lists are a list of packages to be installed
@@ -18,7 +20,7 @@ AVAILABLE_GFX_DRIVERS = {
 	'mesa' : ['mesa'],
 	'fbdev' : ['xf86-video-fbdev'],
 	'vesa' : ['xf86-video-vesa'],
-	'vmware' : ['xf86-video-vmware']
+	'vmware / virtualbox' : ['xf86-video-vmware']
 }
 
 def hasWifi()->bool:
@@ -63,7 +65,7 @@ def cpuVendor()-> Optional[str]:
 
 def isVM() -> bool:
 	try:
-		subprocess.check_call(["systemd-detect-virt"]) # systemd-detect-virt issues a none 0 exit code if it is not on a virtual machine
+		subprocess.check_call(["systemd-detect-virt"]) # systemd-detect-virt issues a non-zero exit code if it is not on a virtual machine
 		return True
 	except:
 		return False
