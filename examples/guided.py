@@ -403,5 +403,7 @@ else:
 	archinstall.arguments['harddrive'].keep_partitions = False
 	# Profile object should be created in perform_installation_steps
 	archinstall.arguments['profile'] = Profile(installer=None, path=archinstall.arguments['profile']['path'])
+	# Temporary workaround to make Desktop Environments work
+	archinstall.storage['_desktop_profile'] = archinstall.arguments['desktop']
 
 perform_installation_steps()
