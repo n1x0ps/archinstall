@@ -1,0 +1,31 @@
+{
+    "!root-password": "******",
+    "audio": null,
+    "bootloader": "systemd-bootctl",
+    "filesystem": "btrfs",
+    "harddrive": {
+        "model": "Ultra_USB_3.0",
+        "path": "/dev/sdb",
+        "size": "28.7G"
+    },
+    "hostname": "box",
+    "kernels": [
+        "linux",
+        "linux-zen"
+    ],
+    "keyboard-language": "us",
+    "mirror-region": {
+        "Worldwide": {
+            "https://mirror.rackspace.com/archlinux/$repo/os/$arch": true
+        }
+    },
+    "nic": {
+        "NetworkManager": true,
+        "nic": "Use NetworkManager to control and manage your internet connection"
+    },
+    "packages": [],
+    "profile": null,
+    "superusers": {},
+    "timezone": "UTC",
+    "users": {}
+}
