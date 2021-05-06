@@ -28,6 +28,8 @@ def initialize_arguments():
 	config = {}
 	parser.add_argument("--config", nargs="?", help="json config file", type=FileType("r", encoding="UTF-8"))
 	parser.add_argument("--env", nargs="?", help="env file with sensitive info", type=FileType("r", encoding="UTF-8"))
+	parser.add_argument("--noconfirm", default=False, action="store_true",
+                    help="Warning!!! Silent install")
 	parser.add_argument("--vars",
 						metavar="KEY=VALUE",
 						nargs='?',
@@ -55,7 +57,8 @@ def initialize_arguments():
 		config['!root-password'] = os.getenv("ROOT_PASSWD")
 		config['users'] = json.loads(os.getenv("USERS"))
 		config['superusers'] = json.loads(os.getenv("SUPERUSERS"))
-
+	if args.noconfirm:
+		config["silent"] = True
 	return config
 
 arguments = initialize_arguments()
