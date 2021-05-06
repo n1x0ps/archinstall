@@ -57,8 +57,7 @@ def initialize_arguments():
 		config['!root-password'] = os.getenv("ROOT_PASSWD")
 		config['users'] = json.loads(os.getenv("USERS"))
 		config['superusers'] = json.loads(os.getenv("SUPERUSERS"))
-	if args.noconfirm:
-		config["silent"] = True
+		config["silent"] = args.noconfirm
 	return config
 
 arguments = initialize_arguments()
