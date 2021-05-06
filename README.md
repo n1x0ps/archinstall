@@ -30,13 +30,13 @@ Assuming you are on a Arch Linux live-ISO and booted into EFI mode.
 ## Running from a declarative [config](examples/base-config.json)
 
 Prequisites:
-   1. Create a .env file with the following contents to provide credentials for user creation
+   1. Create a .env file with the following contents to provide credentials for user creation.
     
     ROOT_PASSWD=<root_password>
     USERS={ "<user1>": { "!password": "<password>" }, "<user2>": { "!password": "<password>" }}
     SUPERUSERS={ "<superuser1>": { "!password": "<password>" }, "<superuser2>": { "!password": "<password>" }}
     
-   2. Edit the config according to your requirements [config](examples/base-config.json)
+   2. Edit the [config](examples/base-config.json) according to your requirements.
 
 Assuming you are on a Arch Linux live-ISO and booted into EFI mode.
 
