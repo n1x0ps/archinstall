@@ -237,7 +237,7 @@ def perform_installation_steps():
 	archinstall.log(json.dumps(archinstall.arguments, indent=4, sort_keys=True, cls=archinstall.JSON), level=logging.INFO)
 	print()
 
-	if archinstall.arguments.get('silent'):
+	if not archinstall.arguments.get('silent'):
 		input('Press Enter to continue.')
 
 	"""
@@ -377,8 +377,10 @@ def perform_installation(mountpoint):
 						exit(1)
 
 		installation.log("For post-installation tips, see https://wiki.archlinux.org/index.php/Installation_guide#Post-installation", fg="yellow")
-		choice = "n" if archinstall.arguments.get('silent') else input("Would you like to chroot into the newly created installation and perform post-installation configuration? [Y/n] ")
-		if choice.lower() in ("y", ""):
+		choice = "n" if  else
+		input("Would you like to chroot into the newly created installation and perform post-installation configuration? [Y/n] ")
+		
+		if choice.lower() in ("y", "") and not archinstall.arguments.get('silent'):
 			try:
 				installation.drop_to_shell()
 			except:
